@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"log"
+	"runtime"
 	"sync"
 
 	"github.com/PuerkitoBio/goquery"
@@ -46,6 +47,10 @@ func (a Article) Show() {
 }
 
 func main() {
+
+	numCPU := runtime.NumCPU()
+	runtime.GOMAXPROCS(numCPU)
+
 	doc, err := goquery.NewDocument(redditUrl)
 	if err != nil {
 		log.Fatal(err)
